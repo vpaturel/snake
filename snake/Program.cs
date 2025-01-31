@@ -1,22 +1,31 @@
 ﻿using Raylib_cs;
+using SerenitySystem.Scenes;
+using SerenitySystem.services;
+using snake;
 class Program
 {
+
+    static ScenesManager scenesManager = new ScenesManager();
     static void Main()
     {
-        int screenWidth = 800;
-        int screenHeight = 600;
+        int screenWidth = 1920;
+        int screenHeight = 1080;
 
-        Raylib.InitWindow(screenWidth, screenHeight, "Snake Game");
+        Raylib.InitWindow(screenWidth, screenHeight, "Snake");
         Raylib.SetTargetFPS(60);
 
+        scenesManager.Load<TestScene>();    
 
         while (!Raylib.WindowShouldClose())
         {
             Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.White);
-            Raylib.DrawText("Snake Game", 10, 10, 20, Color.Black);
+            //Raylib.ClearBackground(Color.White);
+            scenesManager.Update();
+            scenesManager.Draw();
             Raylib.EndDrawing();
         }
         Raylib.CloseWindow();
     }
 }
+
+
