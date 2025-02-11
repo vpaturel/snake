@@ -1,7 +1,7 @@
 ﻿using Raylib_cs;
 using SerenitySystem.Scenes;
-using SerenitySystem.services;
-using snake;
+//using SerenitySystem.services;
+//using snake;
 class Program
 {
 
@@ -14,7 +14,7 @@ class Program
         Raylib.InitWindow(screenWidth, screenHeight, "Snake");
         Raylib.SetTargetFPS(60);
 
-        scenesManager.Load<TestScene>();    
+        scenesManager.Load<GameScence>();    
 
         while (!Raylib.WindowShouldClose())
         {
