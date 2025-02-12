@@ -11,4 +11,10 @@
     <PackageReference Include="Raylib-cs" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Assets\Fonts\" />
+    <Folder Include="Assets\Musics\" />
+    <Folder Include="Assets\Sounds\" />
+  </ItemGroup>
+
 </Project>

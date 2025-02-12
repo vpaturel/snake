@@ -14,7 +14,7 @@ namespace SerenitySystem.services
             }
             else
             {
-             _services[typeof(T)] = service;
+                _services[typeof(T)] = service;
             }
         }
         public static T GetService<T>()

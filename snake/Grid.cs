@@ -7,13 +7,13 @@ using SerenitySystem.coordinates;
 
 namespace snake
 {
-  public class Cell
+    public class Cell
     {
 
         public Coordinates coordinates;
 
         public bool isWalkable = true;
-                private Grid grid;
+        private Grid grid;
         public Cell(Coordinates coordinates, Grid grid)
         {
             this.coordinates = coordinates;
@@ -62,7 +62,7 @@ namespace snake
                 Raylib.DrawLineV(GridToWorld(new(column, 0)), GridToWorld(new(column, rows)), Color.Gray);
 
             for (int row = 0; row <= rows; row++)
-               Raylib.DrawLineV(GridToWorld(new(0, row)), GridToWorld(new(columns, row)), Color.Gray);
+                Raylib.DrawLineV(GridToWorld(new(0, row)), GridToWorld(new(columns, row)), Color.Gray);
 
 
 
@@ -76,23 +76,23 @@ namespace snake
             Cell cell = new Cell(coordinates, this);
 
             grid[coordinates.column, coordinates.row] = cell;
-        } 
+        }
 
         public Cell? GetCell(Coordinates coordinates)
         {
             if (!isInsideGrid(coordinates))
             {
-                return null; 
+                return null;
             }
             return grid[coordinates.column, coordinates.row];
         }
 
 
 
-      
+
         public Coordinates WorldToGrid(Vector2 pos)
         {
-           pos -= position;
+            pos -= position;
             pos /= cellsize;
             return new Coordinates((int)pos.X, (int)pos.Y);
         }
@@ -103,7 +103,7 @@ namespace snake
             return coordinates.ToVector2 + position;
 
         }
-        private bool isInsideGrid(Coordinates coordinates)
+        public bool isInsideGrid(Coordinates coordinates)
         {
             return coordinates.column >= 0 && coordinates.column < columns && coordinates.row >= 0 && coordinates.row < rows;
         }
