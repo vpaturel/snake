@@ -1,5 +1,7 @@
 ﻿using SerenitySystem.coordinates;
+
 using Raylib_cs;
+
 
 namespace snake
 {
@@ -10,6 +12,11 @@ namespace snake
         Coordinates currentDirection = Coordinates.right;
         Coordinates nextDirection = Coordinates.right;
         Color color = Color.White;
+
+        
+
+
+
 
         private Dictionary<int, Texture2D> texttures = new Dictionary<int, Texture2D>()
         {
@@ -48,6 +55,7 @@ namespace snake
                 Console.WriteLine(body.Count);
             }
 
+           
         }
 
 
@@ -59,7 +67,7 @@ namespace snake
             if (!isGrowing) body.Dequeue();
             else isGrowing = false;
 
-            Console.WriteLine(body.Count);
+           // Console.WriteLine(body.Count);
         }
 
         public void SetDirection(Coordinates newDirection)

@@ -3,7 +3,7 @@ using Raylib_cs;
 using System.Numerics;
 using SerenitySystem.services;
 using SerenitySystem.coordinates;
-using SerenitySystem.Helpers.Timer;
+using Timer = SerenitySystem.Helpers.Timer;
 namespace SerenitySystem.Scenes
 {
     public class GameScence : AbstractScene
@@ -15,12 +15,12 @@ namespace SerenitySystem.Scenes
             Paused,
             GameOver
         }
-        Grid grid = new Grid(10, 10, 40);
+        Grid grid = new Grid(25, 14, 40);
         Snake snake;
         Apple apple;
-        Helpers.Timer.Timer gameOverTimer;
-        Helpers.Timer.Timer gamePlayTimer;
-        //Timer timer;
+        Timer gameOverTimer;
+        Timer gamePlayTimer;
+
         GameState gameState = GameState.Playing;
 
 
@@ -31,9 +31,10 @@ namespace SerenitySystem.Scenes
             apple = new Apple(grid);
 
 
-            gameOverTimer = AddTimer(GameOver, 2, false);
+            gameOverTimer = AddTimer(GameOver, 1, false);
             gameOverTimer.Stop();
-            gamePlayTimer= AddTimer(OnTimerTriggered, 0.5f);   
+            gamePlayTimer = AddTimer(OnTimerTriggered, 0.2f);
+            // appleTimer = AddTimer(apple.Respawn, 5, false);
 
 
         }
@@ -51,20 +52,6 @@ namespace SerenitySystem.Scenes
         }
         public override void Update()
         {
-            // if (Raylib.IsMouseButtonPressed(MouseButton.Left))
-            //  {
-            //     var mousePosition = Raylib.GetMousePosition();
-            //     var gridPosition = grid.WorldToGrid(mousePosition);
-            //     Console.WriteLine(gridPosition);
-            //
-            //        if (gridPosition.row < 0 || gridPosition.column >= grid.columns || gridPosition.column < 0 || gridPosition.column >= grid.rows)
-            //        {
-            //            return;
-            //       }
-            //
-            //
-            //        grid.SetCell(gridPosition);
-            //  }
             base.Update();
             switch (gameState)
             {
@@ -76,18 +63,21 @@ namespace SerenitySystem.Scenes
                     break;
 
             }
+
+          
         }
 
 
         private void UpdatePlaying()
         {
             snake.SetDirection(GetInputsDirection());
+            apple.Update();
             if (Raylib.IsKeyPressed(KeyboardKey.P))
             {
                 gameState = GameState.Paused;
-                gamePlayTimer.Stop();   
+                gamePlayTimer.Stop();
             }
-           
+
         }
 
         public void OnTimerTriggered()
@@ -109,10 +99,11 @@ namespace SerenitySystem.Scenes
             if (Raylib.IsKeyPressed(KeyboardKey.P))
             {
                 gameState = GameState.Playing;
-                gamePlayTimer.Start();  
+                gamePlayTimer.Start();
             }
- 
+
         }
+
 
 
 
@@ -140,6 +131,7 @@ namespace SerenitySystem.Scenes
             snake.Draw();
             apple.Draw();
 
+
         }
 
         public override void Unload()
@@ -151,11 +143,29 @@ namespace SerenitySystem.Scenes
         {
             var direction = Coordinates.zero;
 
-            if (Raylib.IsKeyDown(KeyboardKey.W)) direction = Coordinates.up;
-            if (Raylib.IsKeyDown(KeyboardKey.S)) direction = Coordinates.down;
-            if (Raylib.IsKeyDown(KeyboardKey.A)) direction = Coordinates.left;
-            if (Raylib.IsKeyDown(KeyboardKey.D)) direction = Coordinates.right;
-            //utiliser les scancode
+            //if (Raylib.IsKeyDown(KeyboardKey.W)) direction = Coordinates.up;
+            //if (Raylib.IsKeyDown(KeyboardKey.S)) direction = Coordinates.down;
+            //if (Raylib.IsKeyDown(KeyboardKey.A)) direction = Coordinates.left;
+            //if (Raylib.IsKeyDown(KeyboardKey.D)) direction = Coordinates.right;
+            if (Raylib.IsKeyPressed(KeyboardKey.W))
+            {
+                direction = Coordinates.up;
+            }else if (Raylib.IsKeyPressed(KeyboardKey.S))
+            {
+                direction = Coordinates.down;
+            }
+            else if (Raylib.IsKeyPressed(KeyboardKey.A))
+            {
+                direction = Coordinates.left;
+            }
+            else if (Raylib.IsKeyPressed(KeyboardKey.D))
+            {
+                direction = Coordinates.right;
+            }   
+            else
+            {
+                direction = Coordinates.zero;
+            }
             return direction;
         }
 
@@ -182,7 +192,7 @@ namespace SerenitySystem.Scenes
 
         public void GameOver()
         {
-            Services.GetService<IScenesManager>().Load<GameScence>(null);
+            Services.GetService<IScenesManager>().Load<GameOverScence>(new object[] { apple.totalScore });
         }
 
     }

@@ -23,7 +23,7 @@ public static class Game
         Raylib.SetTargetFPS(60);
         Raylib.InitAudioDevice();
 
-        scenesManager.Load<GameScence>(null);
+        scenesManager.Load<MenuScence>(null);
 
         RenderTexture2D canvas = Raylib.LoadRenderTexture(width, height);
         Raylib.SetTextureFilter(canvas.Texture, TextureFilter.Point);

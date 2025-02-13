@@ -1,4 +1,4 @@
-﻿namespace SerenitySystem.Helpers.Timer
+﻿namespace SerenitySystem.Helpers
 {
     public class Timer
     {

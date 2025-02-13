@@ -52,7 +52,9 @@ namespace snake.Tilemap
 
         public void SetTile(Coordinates coordinates, int textureId, string layerName)
         {
+            if (!layers.ContainsKey(layerName)) return;
             if (!IsInBounds(coordinates)) return;
+            if (layersOrder.IndexOf(layerName) == -1) return;
             layers[layerName].tiles[coordinates.column, coordinates.row] = new Tile
             {
                 textureId = textureId,

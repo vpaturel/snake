@@ -1,21 +1,21 @@
-﻿using SerenitySystem.Helpers.Timer;
+﻿using SerenitySystem.Helpers;
 using Raylib_cs;    
 namespace SerenitySystem.Scenes
 {
     public abstract class AbstractScene
     {
-        private List<Helpers.Timer.Timer> timers = new List<Helpers.Timer.Timer>();
+        private List<Helpers.Timer> timers = new List<Helpers.Timer>();
 
-        public Helpers.Timer.Timer AddTimer(Action? callback, float duration, bool isLooping = true)
+        public Helpers.Timer AddTimer(Action? callback, float duration, bool isLooping = true)
         {
-            var timer = new Helpers.Timer.Timer(callback, duration, isLooping);
+            var timer = new Helpers.Timer(callback, duration, isLooping);
             timers.Add(timer);
             return timer;
 
 
         }
 
-        public void RemoveTimer(Helpers.Timer.Timer timer)
+        public void RemoveTimer(Helpers.Timer timer)
         {
             timers.Remove(timer);
         }
@@ -36,7 +36,7 @@ namespace SerenitySystem.Scenes
         public abstract void Load(object[]? args);
         public virtual void Unload()
         {
-            timers = new List<Helpers.Timer.Timer>();
+            timers = new List<Helpers.Timer>();
 
         }
 
