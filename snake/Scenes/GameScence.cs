@@ -17,6 +17,7 @@ namespace SerenitySystem.Scenes
         }
         Grid grid = new Grid(25, 14, 40);
         Snake snake;
+        //Snake snakeBot;
         Apple apple;
         Timer gameOverTimer;
         Timer gamePlayTimer;
@@ -28,6 +29,7 @@ namespace SerenitySystem.Scenes
         {
             grid.position = new Vector2(128, 92);
             snake = new Snake(new Coordinates(5, 5), grid, Color.Green);
+            //snakeBot = new Snake(new Coordinates(10, 5), grid, Color.Green);
             apple = new Apple(grid);
 
 
@@ -71,6 +73,7 @@ namespace SerenitySystem.Scenes
         private void UpdatePlaying()
         {
             snake.SetDirection(GetInputsDirection());
+            //snakeBot.SetDirection(GetInputsDirection());
             apple.Update();
             if (Raylib.IsKeyPressed(KeyboardKey.P))
             {
@@ -83,6 +86,7 @@ namespace SerenitySystem.Scenes
         public void OnTimerTriggered()
         {
             snake.Move();
+            //snakeBot.Move();
             if (snake.IsOutOfBounds() || snake.IsCollidingWithSelf())
             {
                 gameState = GameState.GameOver;
@@ -113,6 +117,7 @@ namespace SerenitySystem.Scenes
         {
             apple.Respawn();
             snake.Grow();
+            //snakeBot.Grow();
         }
 
         public override void Draw()
@@ -129,6 +134,7 @@ namespace SerenitySystem.Scenes
 
             grid.Draw();
             snake.Draw();
+            //snakeBot.Draw();
             apple.Draw();
 
 
@@ -143,30 +149,31 @@ namespace SerenitySystem.Scenes
         {
             var direction = Coordinates.zero;
 
-            //if (Raylib.IsKeyDown(KeyboardKey.W)) direction = Coordinates.up;
-            //if (Raylib.IsKeyDown(KeyboardKey.S)) direction = Coordinates.down;
-            //if (Raylib.IsKeyDown(KeyboardKey.A)) direction = Coordinates.left;
-            //if (Raylib.IsKeyDown(KeyboardKey.D)) direction = Coordinates.right;
-            if (Raylib.IsKeyPressed(KeyboardKey.W))
-            {
-                direction = Coordinates.up;
-            }else if (Raylib.IsKeyPressed(KeyboardKey.S))
-            {
-                direction = Coordinates.down;
-            }
-            else if (Raylib.IsKeyPressed(KeyboardKey.A))
-            {
-                direction = Coordinates.left;
-            }
-            else if (Raylib.IsKeyPressed(KeyboardKey.D))
-            {
-                direction = Coordinates.right;
-            }   
-            else
-            {
-                direction = Coordinates.zero;
-            }
-            return direction;
+            if (Raylib.IsKeyDown(KeyboardKey.W)) direction = Coordinates.up;
+            if (Raylib.IsKeyDown(KeyboardKey.S)) direction = Coordinates.down;
+            if (Raylib.IsKeyDown(KeyboardKey.A)) direction = Coordinates.left;
+            if (Raylib.IsKeyDown(KeyboardKey.D)) direction = Coordinates.right;
+          
+            // if (Raylib.IsKeyPressed(KeyboardKey.W))
+           // {
+           //     direction = Coordinates.up;
+           // }else if (Raylib.IsKeyPressed(KeyboardKey.S))
+           // {
+           //     direction = Coordinates.down;
+           // }
+           // else if (Raylib.IsKeyPressed(KeyboardKey.A))
+           // {
+           //     direction = Coordinates.left;
+           // }
+           // else if (Raylib.IsKeyPressed(KeyboardKey.D))
+           // {
+           //     direction = Coordinates.right;
+           // }   
+           // else
+           // {
+           //     direction = Coordinates.zero;
+           // }
+           return direction;
         }
 
         // private Coordinates GetInputsDirection()

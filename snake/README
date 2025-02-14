@@ -1,0 +1,30 @@
+Nom du prototype : Snake
+Auteur : Paturel Vincent
+
+
+
+1. Comment jouer ?
+Il s’agit d’un snake dont le but est de faire de plus de points possibles.
+Au moment où la pomme spawn, elle vaut 500 points, mais cette valeur diminue rapidement jusqu’à atteindre 0 point. La pomme suivante ne réapparaît pas tant qu’elle n’a pas était mangé et donc le serpent devra tout de même grandir.
+
+Pour espérer avoir le meilleur score, il faut donc manger la pomme le plus rapidement possible.
+
+
+2. Le code source
+
+Les scènes
+	Il y a trois scènes (Menu, game et gameover) hérité d'une scène abstraite. Le tout géré par une scène manager placé derrière une interface servant à limiter les méthodes qu’il est autorisé d’appeler. Le scène manager est distribué par un service manager
+
+
+2.1 Détail des Objets
+
+La grille
+La grille permet de placer les objet de gameplay. Elle est composée de cellule et permet de positionner les objets de gameplay dans celle-ci et de la déplacer selon des coordonnées en ligne et colonne et de conversion ses coordonnées en coordonnées de l’écran. 
+
+Apple 
+La pomme contient les méthodes de calcule du score, et de spawn sur un emplacement aléatoire de la grille.
+Snake
+Le serpent contient les méthodes de déplacement dans la grille, pour grandir lorsqu’une pomme est mangé, ainsi que des collisions entre les limites de la grille. Enfin, on retrouve les méthodes pour afficher la bonne texture en fonction de s’il s'agit de la queue, le corps ou la tête avec la direction de cet élément.  Tous ses éléments sont stockés dans une queue.
+
+
+

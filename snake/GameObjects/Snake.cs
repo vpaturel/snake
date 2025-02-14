@@ -13,7 +13,7 @@ namespace snake
         Coordinates nextDirection = Coordinates.right;
         Color color = Color.White;
 
-        
+
 
 
 
@@ -45,7 +45,7 @@ namespace snake
         public Coordinates head => body.Last();
         public Coordinates tail => body.First();
 
-        public Snake(Coordinates coordinates, Grid grid,Color color, int startSize = 3)
+        public Snake(Coordinates coordinates, Grid grid, Color color, int startSize = 3)
         {
             this.color = color;
             this.grid = grid;
@@ -55,7 +55,7 @@ namespace snake
                 Console.WriteLine(body.Count);
             }
 
-           
+
         }
 
 
@@ -67,12 +67,16 @@ namespace snake
             if (!isGrowing) body.Dequeue();
             else isGrowing = false;
 
-           // Console.WriteLine(body.Count);
+            // Console.WriteLine(body.Count);
         }
 
         public void SetDirection(Coordinates newDirection)
         {
-            if (newDirection == -currentDirection || newDirection == Coordinates.zero) return;
+             if (newDirection == -currentDirection || newDirection == Coordinates.zero) return;
+            //if (newDirection == -currentDirection) return;
+
+
+
             nextDirection = newDirection;
         }
 
@@ -112,12 +116,12 @@ namespace snake
             foreach (var segment in body)
             {
 
-                
-                var bodyArray = body.ToArray(); 
-                for (int i = 1; i <  bodyArray.Length -1; i++)
+
+                var bodyArray = body.ToArray();
+                for (int i = 1; i < bodyArray.Length - 1; i++)
                 {
                     int id = GetBodyTextureID(bodyArray[i - 1], bodyArray[i], bodyArray[i + 1]);
-                    Raylib.DrawTexture(texttures[id], (int)grid.GridToWorld(bodyArray[i]).X, (int)grid.GridToWorld(bodyArray[i]).Y, color); 
+                    Raylib.DrawTexture(texttures[id], (int)grid.GridToWorld(bodyArray[i]).X, (int)grid.GridToWorld(bodyArray[i]).Y, color);
 
                 }
 
